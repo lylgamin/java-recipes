@@ -5,9 +5,12 @@ import { useEffect } from 'react';
 // AdSense パブリッシャーID（ads.txt と一致させること）
 const AD_CLIENT = 'ca-pub-9891812277341685';
 
+// サイト共通の広告スロットID
+const DEFAULT_SLOT = '3245435070';
+
 interface AdUnitProps {
-  /** AdSense 管理画面で発行した広告ユニットのスロットID */
-  slot: string;
+  /** AdSense 管理画面で発行した広告ユニットのスロットID（省略時はサイト共通スロットを使用） */
+  slot?: string;
   /** 広告フォーマット。デフォルト: 'auto' */
   format?: string;
   /** レスポンシブ広告を有効にするか */
@@ -24,7 +27,7 @@ interface AdUnitProps {
  * slot は AdSense 管理画面 > 広告ユニット > コードを取得 で確認できる。
  * 未設定の場合は何も表示しない（開発時のレイアウト確認用にプレースホルダー表示）。
  */
-export default function AdUnit({ slot, format = 'auto', responsive = true, className }: AdUnitProps) {
+export default function AdUnit({ slot = DEFAULT_SLOT, format = 'auto', responsive = true, className }: AdUnitProps) {
   useEffect(() => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

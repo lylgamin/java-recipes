@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
+import AdUnit from "@/components/AdUnit";
 
 const AD_CLIENT = "ca-pub-9891812277341685";
 
@@ -34,6 +35,9 @@ export default function RootLayout({
         <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
           {children}
         </main>
+        <div className="max-w-4xl mx-auto w-full px-4 pb-6">
+          <AdUnit />
+        </div>
         <footer className="border-t border-gray-200 bg-white py-6 text-center text-sm text-gray-500">
           © 2026 java-recipes
         </footer>
