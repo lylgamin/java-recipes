@@ -75,9 +75,11 @@ export default function HomePage() {
           <span className="text-gray-800">recipes</span>
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          現場配属された新人エンジニア向け Pure Java サンプル集。
+          新人エンジニア向け Pure Java サンプル集。
           <br />
           外部ライブラリ不要・Java 8 / 17 / 21 の3バージョン対応。
+          <br />
+          学習の手助けや、外部ライブラリが利用できない場合などにご利用ください。
         </p>
         <div className="mt-5 flex justify-center gap-2 flex-wrap">
           <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
