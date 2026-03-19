@@ -358,6 +358,16 @@ export default function D01Page() {
             を渡したときに NullPointerException が発生すること（または null を返すこと）
           </li>
         </ul>
+        <p className="mt-4 text-sm" style={{ color: "var(--slate-600)" }}>
+          <a
+            href="https://github.com/lylgamin/java-recipes/blob/main/java-samples/java8/src/main/java/DateConversionSample.java"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "var(--blue)" }}
+          >
+            GitHub でソースコードを見る →
+          </a>
+        </p>
       </section>
 
       {/* 5. 関連ページ */}
