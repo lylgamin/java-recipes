@@ -1,17 +1,62 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f9fafb;
-  --foreground: #111827;
+  --navy:       #1e2d3d;
+  --navy-light: #2a3f56;
+  --blue:       #2563eb;
+  --blue-light: #eff6ff;
+  --slate-50:   #f8fafc;
+  --slate-100:  #f1f5f9;
+  --slate-200:  #e2e8f0;
+  --slate-300:  #cbd5e1;
+  --slate-400:  #94a3b8;
+  --slate-500:  #64748b;
+  --slate-700:  #334155;
+  --slate-800:  #1e293b;
+  --white:      #ffffff;
+  --code-bg:    #f1f5f9;
+  --ad-bg:      #fafafa;
+  --ad-border:  #e2e8f0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--slate-50);
+  color: var(--slate-800);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 /* コードブロック内のフォント */
 code, pre {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* 注意点ボックス */
+.warning-box {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+/* サンプル一覧カード */
+.sample-card {
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.sample-card:hover {
+  border-color: #93c5fd !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* トップページ カテゴリカード */
+.category-card {
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.category-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #93c5fd !important;
 }

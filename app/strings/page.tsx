@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import PageWrapper from "@/components/PageWrapper";
+import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
   title: "文字列",
@@ -13,7 +15,7 @@ const samples = [
     href: "/strings/s01/",
     title: "S-01: null安全な文字列操作",
     description:
-      "NullPointerException を避けながら文字列を扱う方法。Objects.toString()、Optional、三項演算子の使い分け。",
+      "NullPointerException を避けながら文字列を扱う方法。Objects.toString()、Optional、if-else の使い分け。",
     tags: ["null安全", "Optional", "NPE対策"],
   },
   {
@@ -44,17 +46,19 @@ const samples = [
 
 export default function StringsPage() {
   return (
-    <>
+    <PageWrapper sidebar={<Sidebar />}>
       <div className="mb-8">
-        <p className="text-sm text-gray-500 mb-1">
-          <Link href="/" className="hover:underline">
+        <p className="text-sm mb-1" style={{ color: "var(--slate-500)" }}>
+          <Link href="/" style={{ color: "var(--blue)", textDecoration: "none" }} className="hover:underline">
             ホーム
           </Link>{" "}
           &rsaquo; 文字列
         </p>
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">文字列</h1>
-        <p className="text-gray-600">
-          Java の文字列処理に関するサンプル集。現場でよく遭遇する null 安全処理から、フォーマット・正規表現まで。
+        <h1 className="text-3xl font-bold mb-3" style={{ color: "var(--slate-800)" }}>
+          文字列
+        </h1>
+        <p style={{ color: "var(--slate-500)" }}>
+          Java の文字列処理に関するサンプル集。null 安全処理から、フォーマット・正規表現まで。
         </p>
       </div>
 
@@ -63,15 +67,31 @@ export default function StringsPage() {
           <li key={s.id}>
             <Link
               href={s.href}
-              className="block p-5 bg-white rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-sm transition-all"
+              className="sample-card block p-5"
+              style={{
+                background: "var(--white)",
+                border: "1px solid var(--slate-200)",
+                borderRadius: "10px",
+                textDecoration: "none",
+              }}
             >
-              <h2 className="font-semibold text-gray-800 mb-1">{s.title}</h2>
-              <p className="text-sm text-gray-600 mb-3">{s.description}</p>
+              <h2 className="font-semibold mb-1" style={{ color: "var(--slate-800)" }}>
+                {s.title}
+              </h2>
+              <p className="text-sm mb-3" style={{ color: "var(--slate-500)" }}>
+                {s.description}
+              </p>
               <div className="flex gap-2 flex-wrap">
                 {s.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-0.5 bg-green-50 text-green-700 rounded text-xs"
+                    style={{
+                      padding: "2px 8px",
+                      background: "var(--blue-light)",
+                      color: "var(--blue)",
+                      borderRadius: "4px",
+                      fontSize: "12px",
+                    }}
                   >
                     {tag}
                   </span>
@@ -81,6 +101,6 @@ export default function StringsPage() {
           </li>
         ))}
       </ul>
-    </>
+    </PageWrapper>
   );
 }

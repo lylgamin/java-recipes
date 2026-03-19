@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import PageWrapper from "@/components/PageWrapper";
+import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
   title: "ネットワーク",
@@ -20,16 +22,18 @@ const samples = [
 
 export default function NetworkPage() {
   return (
-    <>
+    <PageWrapper sidebar={<Sidebar />}>
       <div className="mb-8">
-        <p className="text-sm text-gray-500 mb-1">
-          <Link href="/" className="hover:underline">
+        <p className="text-sm mb-1" style={{ color: "var(--slate-500)" }}>
+          <Link href="/" style={{ color: "var(--blue)", textDecoration: "none" }} className="hover:underline">
             ホーム
           </Link>{" "}
           &rsaquo; ネットワーク
         </p>
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">ネットワーク</h1>
-        <p className="text-gray-600">
+        <h1 className="text-3xl font-bold mb-3" style={{ color: "var(--slate-800)" }}>
+          ネットワーク
+        </h1>
+        <p style={{ color: "var(--slate-500)" }}>
           Java のネットワーク通信サンプル集。外部ライブラリ不要で REST API を呼び出す方法を解説。
         </p>
       </div>
@@ -39,15 +43,31 @@ export default function NetworkPage() {
           <li key={s.id}>
             <Link
               href={s.href}
-              className="block p-5 bg-white rounded-xl border border-gray-200 hover:border-red-300 hover:shadow-sm transition-all"
+              className="sample-card block p-5"
+              style={{
+                background: "var(--white)",
+                border: "1px solid var(--slate-200)",
+                borderRadius: "10px",
+                textDecoration: "none",
+              }}
             >
-              <h2 className="font-semibold text-gray-800 mb-1">{s.title}</h2>
-              <p className="text-sm text-gray-600 mb-3">{s.description}</p>
+              <h2 className="font-semibold mb-1" style={{ color: "var(--slate-800)" }}>
+                {s.title}
+              </h2>
+              <p className="text-sm mb-3" style={{ color: "var(--slate-500)" }}>
+                {s.description}
+              </p>
               <div className="flex gap-2 flex-wrap">
                 {s.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-0.5 bg-red-50 text-red-700 rounded text-xs"
+                    style={{
+                      padding: "2px 8px",
+                      background: "var(--blue-light)",
+                      color: "var(--blue)",
+                      borderRadius: "4px",
+                      fontSize: "12px",
+                    }}
                   >
                     {tag}
                   </span>
@@ -57,6 +77,6 @@ export default function NetworkPage() {
           </li>
         ))}
       </ul>
-    </>
+    </PageWrapper>
   );
 }

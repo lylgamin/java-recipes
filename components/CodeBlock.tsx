@@ -17,19 +17,32 @@ export default function CodeBlock({ code, filename }: CodeBlockProps) {
   };
 
   return (
-    <div className="rounded-lg border border-gray-700 overflow-hidden my-4">
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
-        <span className="text-xs text-gray-400 font-mono">
+    <div
+      className="my-4"
+      style={{ border: "1px solid var(--slate-200)", borderRadius: "8px", overflow: "hidden" }}
+    >
+      <div
+        className="flex items-center justify-between px-4 py-2"
+        style={{
+          background: "#2d3748",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
+        <span className="text-xs font-mono" style={{ color: "var(--slate-400)" }}>
           {filename ?? "Sample.java"}
         </span>
         <button
           onClick={handleCopy}
-          className="text-xs text-gray-400 hover:text-white transition-colors px-2 py-0.5 rounded hover:bg-gray-700"
+          className="text-xs transition-colors px-2 py-0.5 rounded"
+          style={{ color: "var(--slate-400)", background: "transparent", border: "none", cursor: "pointer" }}
         >
           {copied ? "✓ コピーしました" : "コピー"}
         </button>
       </div>
-      <pre className="overflow-x-auto p-4 bg-gray-950 text-gray-100 text-sm leading-relaxed">
+      <pre
+        className="overflow-x-auto p-4 text-sm leading-relaxed"
+        style={{ background: "#1e293b", color: "#e2e8f0" }}
+      >
         <code>{code}</code>
       </pre>
     </div>

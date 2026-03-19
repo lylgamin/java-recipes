@@ -2,12 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import VersionTabs from "@/components/VersionTabs";
 import PageNav from "@/components/PageNav";
+import PageWrapper from "@/components/PageWrapper";
+import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
   title: "D-01: Date ↔ LocalDate ↔ java.sql.Date 相互変換",
   description:
     "java.util.Date、LocalDate、java.sql.Date の相互変換方法を Java 8 / 17 / 21 で解説。Instant を経由した確実な変換パターン。",
 };
+
+const dateNavItems = [
+  { href: "/dates/d01/", label: "D-01: Date/LocalDate 相互変換" },
+  { href: "/dates/d02/", label: "D-02: 日付フォーマット" },
+  { href: "/dates/d03/", label: "D-03: 消費税計算" },
+  { href: "/dates/d04/", label: "D-04: 祝日判定" },
+  { href: "/dates/d05/", label: "D-05: 営業日計算" },
+  { href: "/dates/d06/", label: "D-06: 元号変換" },
+  { href: "/dates/d07/", label: "D-07: タイムゾーン処理" },
+];
 
 const tabs = [
   {
@@ -126,50 +138,109 @@ public class DateConversionSample {
 
 export default function D01Page() {
   return (
-    <>
+    <PageWrapper
+      sidebar={
+        <Sidebar
+          navTitle="日付・時刻"
+          navItems={dateNavItems}
+        />
+      }
+    >
       {/* パンくず */}
-      <p className="text-sm text-gray-500 mb-6">
-        <Link href="/" className="hover:underline">ホーム</Link>
+      <p className="text-sm mb-6" style={{ color: "var(--slate-500)" }}>
+        <Link href="/" style={{ color: "var(--blue)", textDecoration: "none" }} className="hover:underline">
+          ホーム
+        </Link>
         {" "}&rsaquo;{" "}
-        <Link href="/dates/" className="hover:underline">日付・時刻</Link>
+        <Link href="/dates/" style={{ color: "var(--blue)", textDecoration: "none" }} className="hover:underline">
+          日付・時刻
+        </Link>
         {" "}&rsaquo; D-01
       </p>
 
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">
+      <h1 className="text-2xl font-bold mb-2" style={{ color: "var(--slate-800)" }}>
         D-01: java.util.Date ↔ LocalDate ↔ java.sql.Date 相互変換
       </h1>
-      <p className="text-gray-600 mb-8">
-        レガシーコードとモダンコードが混在する現場で頻出の型変換パターン。
-        <code className="bg-gray-100 px-1 rounded text-sm">Instant</code> を経由した確実な変換方法を解説します。
+      <p className="mb-8" style={{ color: "var(--slate-500)" }}>
+        レガシーコードとモダンコードが混在する場面で頻出の型変換パターン。
+        <code
+          style={{
+            background: "var(--slate-100)",
+            padding: "1px 6px",
+            borderRadius: "4px",
+            fontSize: "13px",
+          }}
+        >
+          Instant
+        </code>{" "}
+        を経由した確実な変換方法を解説します。
       </p>
 
       {/* 1. 説明・ユースケース */}
       <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-800 mb-3">
+        <h2
+          className="text-xl font-semibold mb-3"
+          style={{
+            color: "var(--slate-800)",
+            borderBottom: "2px solid var(--slate-200)",
+            paddingBottom: "8px",
+          }}
+        >
           いつ使うか
         </h2>
-        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm leading-relaxed">
+        <ul className="list-disc list-inside space-y-2 text-sm leading-relaxed" style={{ color: "var(--slate-700)" }}>
           <li>
             古いコード（Java 8 以前）が返す{" "}
-            <code className="bg-gray-100 px-1 rounded">java.util.Date</code> を
-            モダンな処理で使いたいとき
+            <code
+              style={{
+                background: "var(--slate-100)",
+                padding: "1px 6px",
+                borderRadius: "4px",
+              }}
+            >
+              java.util.Date
+            </code>{" "}
+            をモダンな処理で使いたいとき
           </li>
           <li>
             JDBC の ResultSet から取得した{" "}
-            <code className="bg-gray-100 px-1 rounded">java.sql.Date</code> を
-            ビジネスロジックで扱いたいとき
+            <code
+              style={{
+                background: "var(--slate-100)",
+                padding: "1px 6px",
+                borderRadius: "4px",
+              }}
+            >
+              java.sql.Date
+            </code>{" "}
+            をビジネスロジックで扱いたいとき
           </li>
           <li>
             計算結果の{" "}
-            <code className="bg-gray-100 px-1 rounded">LocalDate</code> を
-            JDBC / 古い API に渡すとき
+            <code
+              style={{
+                background: "var(--slate-100)",
+                padding: "1px 6px",
+                borderRadius: "4px",
+              }}
+            >
+              LocalDate
+            </code>{" "}
+            を JDBC / 古い API に渡すとき
           </li>
         </ul>
       </section>
 
       {/* 2. サンプルコード */}
       <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-800 mb-3">
+        <h2
+          className="text-xl font-semibold mb-3"
+          style={{
+            color: "var(--slate-800)",
+            borderBottom: "2px solid var(--slate-200)",
+            paddingBottom: "8px",
+          }}
+        >
           サンプルコード
         </h2>
         <VersionTabs tabs={tabs} filename="DateConversionSample.java" />
@@ -177,34 +248,81 @@ export default function D01Page() {
 
       {/* 3. よくあるミス */}
       <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-800 mb-3">
+        <h2
+          className="text-xl font-semibold mb-3"
+          style={{
+            color: "var(--slate-800)",
+            borderBottom: "2px solid var(--slate-200)",
+            paddingBottom: "8px",
+          }}
+        >
           よくあるミス・注意点
         </h2>
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 space-y-3 text-sm text-gray-700">
-          <div>
-            <p className="font-semibold text-amber-800 mb-1">
+        <div className="space-y-3 text-sm" style={{ color: "var(--slate-700)" }}>
+          <div className="warning-box">
+            <p className="font-semibold mb-1" style={{ color: "#92400e" }}>
               ⚠️ タイムゾーンを省略すると環境依存になる
             </p>
-            <p>
-              <code className="bg-gray-100 px-1 rounded">ZoneId.systemDefault()</code>{" "}
+            <p style={{ color: "#78350f", margin: 0 }}>
+              <code
+                style={{
+                  background: "rgba(0,0,0,0.06)",
+                  padding: "1px 6px",
+                  borderRadius: "4px",
+                }}
+              >
+                ZoneId.systemDefault()
+              </code>{" "}
               はJVMのデフォルトタイムゾーンを使います。
               サーバーの環境によって UTC や JST が変わると日付がズレます。
               本番環境では{" "}
-              <code className="bg-gray-100 px-1 rounded">{'ZoneId.of("Asia/Tokyo")'}</code>{" "}
+              <code
+                style={{
+                  background: "rgba(0,0,0,0.06)",
+                  padding: "1px 6px",
+                  borderRadius: "4px",
+                }}
+              >
+                {'ZoneId.of("Asia/Tokyo")'}
+              </code>{" "}
               のように明示するのが安全です。
             </p>
           </div>
-          <div>
-            <p className="font-semibold text-amber-800 mb-1">
+          <div className="warning-box">
+            <p className="font-semibold mb-1" style={{ color: "#92400e" }}>
               ⚠️ java.sql.Date に対して toInstant() を呼ぶと例外
             </p>
-            <p>
-              <code className="bg-gray-100 px-1 rounded">java.sql.Date.toInstant()</code>{" "}
+            <p style={{ color: "#78350f", margin: 0 }}>
+              <code
+                style={{
+                  background: "rgba(0,0,0,0.06)",
+                  padding: "1px 6px",
+                  borderRadius: "4px",
+                }}
+              >
+                java.sql.Date.toInstant()
+              </code>{" "}
               は{" "}
-              <code className="bg-gray-100 px-1 rounded">UnsupportedOperationException</code>{" "}
+              <code
+                style={{
+                  background: "rgba(0,0,0,0.06)",
+                  padding: "1px 6px",
+                  borderRadius: "4px",
+                }}
+              >
+                UnsupportedOperationException
+              </code>{" "}
               をスローします。
               必ず{" "}
-              <code className="bg-gray-100 px-1 rounded">toLocalDate()</code>{" "}
+              <code
+                style={{
+                  background: "rgba(0,0,0,0.06)",
+                  padding: "1px 6px",
+                  borderRadius: "4px",
+                }}
+              >
+                toLocalDate()
+              </code>{" "}
               を使ってください。
             </p>
           </div>
@@ -213,16 +331,31 @@ export default function D01Page() {
 
       {/* 4. テストする観点 */}
       <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-800 mb-3">
+        <h2
+          className="text-xl font-semibold mb-3"
+          style={{
+            color: "var(--slate-800)",
+            borderBottom: "2px solid var(--slate-200)",
+            paddingBottom: "8px",
+          }}
+        >
           テストする観点
         </h2>
-        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm leading-relaxed">
+        <ul className="list-disc list-inside space-y-2 text-sm leading-relaxed" style={{ color: "var(--slate-700)" }}>
           <li>日付の値が変換前後で一致すること（年・月・日）</li>
           <li>タイムゾーンが JST の環境と UTC の環境で同じ結果になること</li>
           <li>うるう年（2月29日）が正しく変換されること</li>
           <li>
-            <code className="bg-gray-100 px-1 rounded">null</code> を渡したときに
-            NullPointerException が発生すること（または null を返すこと）
+            <code
+              style={{
+                background: "var(--slate-100)",
+                padding: "1px 6px",
+                borderRadius: "4px",
+              }}
+            >
+              null
+            </code>{" "}
+            を渡したときに NullPointerException が発生すること（または null を返すこと）
           </li>
         </ul>
       </section>
@@ -240,6 +373,6 @@ export default function D01Page() {
           { href: "/dates/d07/", label: "D-07: タイムゾーン処理" },
         ]}
       />
-    </>
+    </PageWrapper>
   );
 }

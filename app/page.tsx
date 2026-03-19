@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import PageWrapper from "@/components/PageWrapper";
+import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
   title: "java-recipes — Pure Java サンプル集",
@@ -8,8 +10,8 @@ export const metadata: Metadata = {
 const categories = [
   {
     href: "/dates/",
+    icon: "📅",
     label: "日付・時刻",
-    color: "border-blue-400 bg-blue-50",
     description: "日付変換・フォーマット・祝日・営業日・和暦・タイムゾーン",
     items: [
       "D-01 Date/LocalDate 相互変換",
@@ -23,8 +25,8 @@ const categories = [
   },
   {
     href: "/strings/",
+    icon: "🔤",
     label: "文字列",
-    color: "border-green-400 bg-green-50",
     description: "null安全・パディング・フォーマット・正規表現",
     items: [
       "S-01 null安全な文字列操作",
@@ -35,8 +37,8 @@ const categories = [
   },
   {
     href: "/collections/",
+    icon: "📦",
     label: "コレクション",
-    color: "border-purple-400 bg-purple-50",
     description: "List / Map / Set・Stream API・ソート・グルーピング",
     items: [
       "C-01 List/Map/Set 基本操作",
@@ -46,8 +48,8 @@ const categories = [
   },
   {
     href: "/fileio/",
+    icon: "📁",
     label: "ファイルI/O",
-    color: "border-yellow-400 bg-yellow-50",
     description: "CSV・properties・java.nio.file によるファイル操作",
     items: [
       "F-01 CSVの読み書き",
@@ -57,8 +59,8 @@ const categories = [
   },
   {
     href: "/network/",
+    icon: "🌐",
     label: "ネットワーク",
-    color: "border-red-400 bg-red-50",
     description: "HttpClient によるREST呼び出し（Java 11〜）",
     items: ["N-01 HttpClient REST呼び出し"],
   },
@@ -66,32 +68,95 @@ const categories = [
 
 export default function HomePage() {
   return (
-    <>
+    <PageWrapper sidebar={<Sidebar tall />}>
       {/* Hero */}
-      <section className="mb-12 text-center py-10">
-        <h1 className="text-4xl font-bold text-gray-900 mb-3">
-          <span className="text-orange-500">java</span>
-          <span className="text-gray-400">-</span>
-          <span className="text-gray-800">recipes</span>
+      <section
+        style={{
+          background: "var(--white)",
+          border: "1px solid var(--slate-200)",
+          borderRadius: "12px",
+          padding: "40px 32px",
+          marginBottom: "32px",
+          textAlign: "center",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "32px",
+            fontWeight: 800,
+            letterSpacing: "-0.5px",
+            marginBottom: "12px",
+          }}
+        >
+          <span style={{ color: "#2563eb" }}>java</span>
+          <span style={{ color: "var(--slate-400)" }}>-</span>
+          <span style={{ color: "var(--slate-800)" }}>recipes</span>
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        <p
+          style={{
+            color: "var(--slate-500)",
+            fontSize: "15px",
+            maxWidth: "520px",
+            margin: "0 auto 20px",
+          }}
+        >
           新人エンジニア向け Pure Java サンプル集。
           <br />
           外部ライブラリ不要・Java 8 / 17 / 21 の3バージョン対応。
           <br />
           学習の手助けや、外部ライブラリが利用できない場合などにご利用ください。
         </p>
-        <div className="mt-5 flex justify-center gap-2 flex-wrap">
-          <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
+        <div className="flex justify-center gap-2 flex-wrap">
+          <span
+            style={{
+              padding: "4px 12px",
+              borderRadius: "20px",
+              fontSize: "12.5px",
+              fontWeight: 600,
+              background: "#eff6ff",
+              color: "#1d4ed8",
+              border: "1px solid #bfdbfe",
+            }}
+          >
             Java 8
           </span>
-          <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
+          <span
+            style={{
+              padding: "4px 12px",
+              borderRadius: "20px",
+              fontSize: "12.5px",
+              fontWeight: 600,
+              background: "#eff6ff",
+              color: "#1d4ed8",
+              border: "1px solid #bfdbfe",
+            }}
+          >
             Java 17
           </span>
-          <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
+          <span
+            style={{
+              padding: "4px 12px",
+              borderRadius: "20px",
+              fontSize: "12.5px",
+              fontWeight: 600,
+              background: "#eff6ff",
+              color: "#1d4ed8",
+              border: "1px solid #bfdbfe",
+            }}
+          >
             Java 21
           </span>
-          <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
+          <span
+            style={{
+              padding: "4px 12px",
+              borderRadius: "20px",
+              fontSize: "12.5px",
+              fontWeight: 600,
+              background: "var(--slate-100)",
+              color: "var(--slate-500)",
+              border: "1px solid var(--slate-200)",
+            }}
+          >
             Pure Java のみ
           </span>
         </div>
@@ -99,24 +164,77 @@ export default function HomePage() {
 
       {/* Category Grid */}
       <section>
-        <h2 className="text-xl font-semibold text-gray-700 mb-6">
+        <p
+          style={{
+            fontSize: "14px",
+            fontWeight: 600,
+            color: "var(--slate-500)",
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            marginBottom: "16px",
+          }}
+        >
           カテゴリ一覧
-        </h2>
-        <div className="grid gap-6 sm:grid-cols-2">
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {categories.map((cat) => (
             <Link
               key={cat.href}
               href={cat.href}
-              className={`block p-5 rounded-xl border-l-4 ${cat.color} hover:shadow-md transition-shadow`}
+              className="category-card block"
+              style={{
+                background: "var(--white)",
+                border: "1px solid var(--slate-200)",
+                borderRadius: "10px",
+                padding: "20px",
+                textDecoration: "none",
+              }}
             >
-              <h3 className="font-bold text-gray-800 text-lg mb-1">
+              <div style={{ fontSize: "22px", marginBottom: "8px" }}>{cat.icon}</div>
+              <h3
+                style={{
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  color: "var(--slate-800)",
+                  marginBottom: "4px",
+                }}
+              >
                 {cat.label}
               </h3>
-              <p className="text-sm text-gray-600 mb-3">{cat.description}</p>
-              <ul className="space-y-1">
+              <p
+                style={{
+                  fontSize: "12.5px",
+                  color: "var(--slate-500)",
+                  marginBottom: "10px",
+                  lineHeight: 1.5,
+                }}
+              >
+                {cat.description}
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {cat.items.map((item) => (
-                  <li key={item} className="text-xs text-gray-500">
-                    · {item}
+                  <li
+                    key={item}
+                    style={{
+                      fontSize: "12px",
+                      color: "var(--slate-400)",
+                      padding: "2px 0",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "4px",
+                        height: "4px",
+                        background: "var(--slate-300)",
+                        borderRadius: "50%",
+                        flexShrink: 0,
+                        display: "inline-block",
+                      }}
+                    />
+                    {item}
                   </li>
                 ))}
               </ul>
@@ -124,6 +242,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-    </>
+    </PageWrapper>
   );
 }
